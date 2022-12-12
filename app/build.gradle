@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'de.fuh.michel.fachpraktikum_wi2022'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "de.fuh.michel.fachpraktikum_wi2022"
-        minSdk 21
-        targetSdk 32
+        minSdk 24
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -28,6 +28,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 
@@ -41,6 +42,10 @@ dependencies {
 
     // Barcode scanning API
     implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     // CameraX library
     def camerax_version = "1.1.0"

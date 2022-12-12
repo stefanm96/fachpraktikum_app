@@ -1,7 +1,6 @@
-package de.fuh.michel.fachpraktikum_wi2022;
+package de.fuh.michel.fachpraktikum_wi2022.view;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LifecycleOwner;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -24,13 +22,16 @@ import com.google.common.util.concurrent.ListenableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import de.fuh.michel.fachpraktikum_wi2022.GmafApplication;
 import de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityBarcodeScannerBinding;
-import de.fuh.michel.fachpraktikum_wi2022.qrcodescanner.QrCodeAnalyzer;
+import de.fuh.michel.fachpraktikum_wi2022.domain.MainService;
+import de.fuh.michel.fachpraktikum_wi2022.domain.qrcodescanner.QrCodeAnalyzer;
 
 public class BarcodeScannerActivity extends AppCompatActivity {
 
     private ExecutorService cameraExecutor;
     private ActivityBarcodeScannerBinding binding;
+    private MainService mainService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,10 +39,9 @@ public class BarcodeScannerActivity extends AppCompatActivity {
         binding = ActivityBarcodeScannerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        cameraExecutor = Executors.newSingleThreadExecutor();
+        mainService = ((GmafApplication) getApplication()).getMainService();
 
-        BarcodeBoxView barcodeBoxView = new BarcodeBoxView(this);
-        addContentView(barcodeBoxView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        cameraExecutor = Executors.newSingleThreadExecutor();
 
         checkCameraPermission();
     }
@@ -94,28 +94,17 @@ public class BarcodeScannerActivity extends AppCompatActivity {
             try {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
 
-                // Preview
-                Preview preview = new Preview.Builder()
-                        .build();
+                Preview preview = new Preview.Builder().build();
                 preview.setSurfaceProvider(binding.previewView.getSurfaceProvider());
 
-                // Image analyzer
                 ImageAnalysis imageAnalyzer = new ImageAnalysis.Builder()
                         .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                         .build();
                 imageAnalyzer.setAnalyzer(cameraExecutor, new QrCodeAnalyzer(this,
-                        new BarcodeBoxView(this),
-                        (float) binding.previewView.getWidth(),
-                        (float) binding.previewView.getHeight()));
+                        content -> mainService.importDefinition(content)));
 
-                // Select back camera as a default
                 CameraSelector cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
-
-
-                // Unbind use cases before rebinding
                 cameraProvider.unbindAll();
-
-                // Bind use cases to camera
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer);
 
             } catch (Exception e) {

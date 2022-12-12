@@ -1,0 +1,35 @@
+<process-flow name="SampleConfig" extension="*.jpg" isGeneral="false">
+
+    <plugin-definition name="plugin1" class="de.swa.bla.Blub"/>
+    <plugin-definition name="plugin2" class="de.swa.bla.Blub"/>
+    <plugin-definition name="plugin3" class="de.swa.bla.Blub"/>
+    <plugin-definition name="plugin4" class="de.swa.bla.Blub"/>
+    <plugin-definition name="plugin5" class="de.swa.bla.Blub"/>
+
+    <fusion-definition name="merge1" class="de.swa.feat.Bla"/>
+    <fusion-definition name="merge2" class="de.swa.feat.Bla"/>
+    <fusion-definition name="merge3" class="de.swa.feat.Bla"/>
+
+    <export-definition name="mpeg7" class="de.swa.exp.Bla"/>
+    <export-definition name="xml" class="de.swa.exp.Bla"/>
+    <export-definition name="graphml" class="de.swa.exp.Bla"/>
+
+    <resource-definition name="upload-dir" type="folder" location="temp/upload"/>
+    <resource-definition name="target-dir" type="folder" location="temp/target"/>
+    <resource-definition name="export-dir" type="folder" location="temp/export"/>
+    <resource-definition name="facebook" type="url" location="http://www...."/>
+
+    <param name="plugin1.lod" value="2"/>
+    <param name="plugin2.output" value="temp"/>
+
+    <flow-source name="upload-dir"/>
+    <mmfg processor="plugin1, plugin2, plugin3"/>
+    <fusion processor="merge1"/>
+    <param name="plugin5.source" value="5"/>
+    <mmfg processor="plugin5"/>
+    <fusion processor="merge3"/>
+
+    <export target="export-dir" exporter="mpeg7"/>
+    <export target="collection"/>
+
+</process-flow>

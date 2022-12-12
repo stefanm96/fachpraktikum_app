@@ -1,10 +1,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="de.fuh.michel.fachpraktikum_wi2022.MainActivity">
+    tools:context="de.fuh.michel.fachpraktikum_wi2022.view.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_add_definition"
+        android:icon="@drawable/ic_baseline_qr_code_scanner_24"
+        android:title="@string/add"
+        android:contentDescription="@string/content_description_favorite"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_add_configuration_element"
+        android:icon="@drawable/ic_baseline_add_24"
+        android:title="@string/add"
+        android:contentDescription="@string/content_description_favorite"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_new"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_new"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_import"
+        android:orderInCategory="100"
+        android:title="@string/action_import"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_export"
+        android:orderInCategory="100"
+        android:title="@string/action_export"
+        app:showAsAction="never"/>
 </menu>
