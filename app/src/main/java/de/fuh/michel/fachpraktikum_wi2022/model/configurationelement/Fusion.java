@@ -5,6 +5,8 @@ import de.fuh.michel.fachpraktikum_wi2022.model.visitor.Visitor;
 
 public class Fusion implements ConfigurationElement {
 
+    public static final String CONFIGURATION_ELEMENT_TYPE = "fusion";
+
     private String processor;
 
     public Fusion(String processor) {
@@ -14,6 +16,11 @@ public class Fusion implements ConfigurationElement {
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public String getConfigurationElementType() {
+        return CONFIGURATION_ELEMENT_TYPE;
     }
 
     public String getProcessor() {

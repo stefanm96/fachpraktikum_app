@@ -39,6 +39,9 @@ public class XmlExportVisitor implements Visitor {
     public void visit(ProcessFlow processFlow) {
         startDocument();
         startTag(ProcessFlowTag.TAG_NAME);
+        attribute("name", processFlow.getName());
+        attribute("extension", processFlow.getExtension());
+        attribute("isGeneral", String.valueOf(processFlow.isGeneral()));
 
         for (Definition definition : processFlow.getDefinitions()) {
             definition.accept(this);

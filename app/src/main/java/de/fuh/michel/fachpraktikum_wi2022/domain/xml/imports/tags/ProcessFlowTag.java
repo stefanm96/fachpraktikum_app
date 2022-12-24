@@ -9,7 +9,7 @@ public class ProcessFlowTag implements XmlTag {
     public static final String TAG_NAME = "process-flow";
 
     @Override
-    public void apply(ProcessFlow processFlow, XmlPullParser xmlParser) {
+    public void apply(XmlPullParser xmlParser, ProcessFlow processFlow) {
         processFlow.setName(xmlParser.getAttributeValue(null, "name"));
         processFlow.setExtension(xmlParser.getAttributeValue(null, "extension"));
         processFlow.setGeneral(Boolean.parseBoolean(xmlParser.getAttributeValue(null, "isGeneral")));

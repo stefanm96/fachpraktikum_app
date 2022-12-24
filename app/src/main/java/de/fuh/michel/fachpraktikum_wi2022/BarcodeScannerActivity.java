@@ -1,9 +1,8 @@
-package de.fuh.michel.fachpraktikum_wi2022.view;
+package de.fuh.michel.fachpraktikum_wi2022;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,16 +21,15 @@ import com.google.common.util.concurrent.ListenableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import de.fuh.michel.fachpraktikum_wi2022.GmafApplication;
 import de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityBarcodeScannerBinding;
-import de.fuh.michel.fachpraktikum_wi2022.domain.MainService;
 import de.fuh.michel.fachpraktikum_wi2022.domain.qrcodescanner.QrCodeAnalyzer;
+import de.fuh.michel.fachpraktikum_wi2022.view.ProcessFlowViewModel;
 
 public class BarcodeScannerActivity extends AppCompatActivity {
 
     private ExecutorService cameraExecutor;
     private ActivityBarcodeScannerBinding binding;
-    private MainService mainService;
+    private ProcessFlowViewModel processFlowViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +37,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
         binding = ActivityBarcodeScannerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        mainService = ((GmafApplication) getApplication()).getMainService();
+        processFlowViewModel = ((GmafApplication) getApplication()).getProcessFlowViewModel();
 
         cameraExecutor = Executors.newSingleThreadExecutor();
 
@@ -101,7 +99,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
                         .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                         .build();
                 imageAnalyzer.setAnalyzer(cameraExecutor, new QrCodeAnalyzer(this,
-                        content -> mainService.importDefinition(content)));
+                        stringContent -> processFlowViewModel.importDefinition(stringContent)));
 
                 CameraSelector cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
                 cameraProvider.unbindAll();

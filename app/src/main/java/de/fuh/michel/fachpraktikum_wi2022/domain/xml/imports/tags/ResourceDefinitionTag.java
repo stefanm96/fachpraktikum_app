@@ -9,7 +9,7 @@ public class ResourceDefinitionTag implements XmlTag {
     public static final String TAG_NAME = "resource-definition";
 
     @Override
-    public void apply(ProcessFlow processFlow, XmlPullParser xmlParser) {
+    public void apply(XmlPullParser xmlParser, ProcessFlow processFlow) {
         String name = xmlParser.getAttributeValue(null, "name");
         String type = xmlParser.getAttributeValue(null, "type");
         String location = xmlParser.getAttributeValue(null, "location");

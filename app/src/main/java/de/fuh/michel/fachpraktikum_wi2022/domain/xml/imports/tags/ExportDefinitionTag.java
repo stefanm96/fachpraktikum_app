@@ -9,7 +9,7 @@ public class ExportDefinitionTag implements XmlTag {
     public static final String TAG_NAME = "export-definition";
 
     @Override
-    public void apply(ProcessFlow processFlow, XmlPullParser xmlParser) {
+    public void apply(XmlPullParser xmlParser, ProcessFlow processFlow) {
         String name = xmlParser.getAttributeValue(null, "name");
         String clazz = xmlParser.getAttributeValue(null, "class");
 

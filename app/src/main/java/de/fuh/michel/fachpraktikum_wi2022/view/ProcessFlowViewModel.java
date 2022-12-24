@@ -3,27 +3,36 @@ package de.fuh.michel.fachpraktikum_wi2022.view;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import de.fuh.michel.fachpraktikum_wi2022.domain.xml.export.XmlExporter;
+import de.fuh.michel.fachpraktikum_wi2022.domain.xml.imports.XmlParser;
 import de.fuh.michel.fachpraktikum_wi2022.model.ConfigurationElement;
 import de.fuh.michel.fachpraktikum_wi2022.model.Definition;
 import de.fuh.michel.fachpraktikum_wi2022.model.ProcessFlow;
 
 public class ProcessFlowViewModel extends ViewModel {
 
+    private final XmlParser xmlParser;
+    private final XmlExporter xmlExporter;
+
     private final MutableLiveData<String> nameLiveData = new MutableLiveData<>();
     private final MutableLiveData<String> extensionLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isGeneralLiveData = new MutableLiveData<>();
 
-    private final MutableLiveData<List<Definition>> definitionsLiveData =
-            new MutableLiveData<>();
+    private final MutableLiveData<List<Definition>> definitionsLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<ConfigurationElement>> configurationElementsLiveData = new MutableLiveData<>();
 
-    private final MutableLiveData<List<ConfigurationElement>> configurationElementsLiveData =
-            new MutableLiveData<>();
-
-    public ProcessFlowViewModel() {
+    public ProcessFlowViewModel(XmlParser xmlParser, XmlExporter xmlExporter) {
+        this.xmlParser = xmlParser;
+        this.xmlExporter = xmlExporter;
         init();
     }
 
@@ -33,6 +42,19 @@ public class ProcessFlowViewModel extends ViewModel {
         isGeneralLiveData.postValue(false);
         definitionsLiveData.postValue(new ArrayList<>());
         configurationElementsLiveData.postValue(new ArrayList<>());
+    }
+
+    public void exportProcessFlow() {
+        xmlExporter.exportProcessFlow(getProcessFlow());
+    }
+
+    public void importProcessFlow(String fileContent) throws Exception {
+        setProcessFlow(xmlParser.parseProcessFlow(fileContent));
+    }
+
+    public void importDefinition(String content) {
+        Definition definition = xmlParser.parseDefinition(content);
+        addDefinition(definition);
     }
 
     public ProcessFlow getProcessFlow() {
@@ -57,34 +79,8 @@ public class ProcessFlowViewModel extends ViewModel {
         configurationElementsLiveData.postValue(processFlow.getConfigurationElements());
     }
 
-    public void clearData() {
+    public void newProcessFlow() {
         init();
-    }
-
-    public void removeDefinition(String type, String name) {
-        List<Definition> newList = definitionsLiveData.getValue();
-
-        if (newList.size() < 1) {
-            return;
-        }
-
-        newList.removeIf(definition -> definition.getDefinitionType().equals(type) &&
-                definition.getName().equals(name));
-        definitionsLiveData.postValue(newList);
-    }
-
-    public long getNumberOfDefinitionTypes() {
-        return definitionsLiveData.getValue().stream()
-                .map(Definition::getDefinitionType)
-                .distinct()
-                .count();
-    }
-
-    public long getNumberOfDefinitionsForType(String definitionType) {
-        return definitionsLiveData.getValue().stream()
-                .map(Definition::getDefinitionType)
-                .filter(definitionType::equals)
-                .count();
     }
 
     public List<Definition> getDefinitionsForType(String currentDefinitionType) {
@@ -114,14 +110,32 @@ public class ProcessFlowViewModel extends ViewModel {
     }
 
     public void removeDefinition(Definition definition) {
-        List<Definition> newList = definitionsLiveData.getValue();
-        newList.remove(definition);
-        definitionsLiveData.postValue(newList);
+        applyToLiveDataList(definitionsLiveData, list -> list.remove(definition));
     }
 
     public void addDefinition(Definition definition) {
-        List<Definition> newList = definitionsLiveData.getValue();
-        newList.add(definition);
-        definitionsLiveData.postValue(newList);
+        applyToLiveDataList(definitionsLiveData, list -> list.add(definition));
+    }
+
+    public void addConfigurationElement(ConfigurationElement configurationElement) {
+        applyToLiveDataList(configurationElementsLiveData, list -> list.add(configurationElement));
+    }
+
+    public void removeConfigurationElement(int position) {
+        applyToLiveDataList(configurationElementsLiveData, list -> list.remove(position));
+    }
+
+    public void swapConfigurationElements(int fromPosition, int toPosition) {
+        applyToLiveDataList(configurationElementsLiveData, list -> Collections.swap(list, fromPosition, toPosition));
+    }
+
+    public void editConfigurationElement(int position, ConfigurationElement configurationElement) {
+        applyToLiveDataList(configurationElementsLiveData, list -> list.set(position, configurationElement));
+    }
+
+    private <T> void applyToLiveDataList(MutableLiveData<List<T>> liveDataList, Consumer<List<T>> listConsumer) {
+        List<T> newList = liveDataList.getValue();
+        listConsumer.accept(newList);
+        liveDataList.postValue(newList);
     }
 }

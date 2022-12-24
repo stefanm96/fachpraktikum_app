@@ -81,7 +81,7 @@ public class DefinitionRecyclerViewAdapter
         public Definition mItem;
 
         public DefinitionViewHolder(@NonNull FragmentDefintionBinding binding) {
-            super(binding.constraintLayout);
+            super(binding.getRoot());
 
             mDefinitionNameView = binding.definitionName;
             mDefinitionNameView.setOnClickListener(this);

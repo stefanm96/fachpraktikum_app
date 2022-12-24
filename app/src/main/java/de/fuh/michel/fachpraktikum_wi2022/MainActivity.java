@@ -1,10 +1,11 @@
-package de.fuh.michel.fachpraktikum_wi2022.view;
+package de.fuh.michel.fachpraktikum_wi2022;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -12,39 +13,37 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-
-import de.fuh.michel.fachpraktikum_wi2022.GmafApplication;
-import de.fuh.michel.fachpraktikum_wi2022.R;
 import de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityMainBinding;
-import de.fuh.michel.fachpraktikum_wi2022.domain.MainService;
+import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Export;
+import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.FlowSource;
+import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Fusion;
+import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Mmfg;
+import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Parameter;
+import de.fuh.michel.fachpraktikum_wi2022.view.configurationelement.list.ConfigurationListFragment;
+import de.fuh.michel.fachpraktikum_wi2022.view.ProcessFlowViewModel;
+import de.fuh.michel.fachpraktikum_wi2022.view.TabPagerAdapter;
 import de.fuh.michel.fachpraktikum_wi2022.view.definition.DefinitionListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private ActivityMainBinding binding;
-    private MainService mainService;
     private ProcessFlowViewModel processFlowViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mainService = ((GmafApplication) getApplication()).getMainService();
         processFlowViewModel = ((GmafApplication) getApplication()).getProcessFlowViewModel();
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Tabs
         TabPagerAdapter sectionsPagerAdapter = new TabPagerAdapter(this, getSupportFragmentManager());
 
-        sectionsPagerAdapter.addFragment(DefinitionListFragment.newInstance(processFlowViewModel, 1));
-        sectionsPagerAdapter.addFragment(new ConfigurationListFragment());
+        sectionsPagerAdapter.addFragment(DefinitionListFragment.newInstance(processFlowViewModel));
+        sectionsPagerAdapter.addFragment(ConfigurationListFragment.newInstance(processFlowViewModel));
 
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -68,16 +67,32 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_add_definition) {
             Intent intent = new Intent(this, BarcodeScannerActivity.class);
             startActivity(intent);
-
             return true;
         }
-        if (id == R.id.action_add_configuration_element) {
+        if (id == R.id.action_add_parameter) {
+            startCreateActivity(Parameter.CONFIGURATION_ELEMENT_TYPE);
+            return true;
+        }
+        if (id == R.id.action_add_flow_source) {
+            startCreateActivity(FlowSource.CONFIGURATION_ELEMENT_TYPE);
+            return true;
+        }
+        if (id == R.id.action_add_fusion) {
+            startCreateActivity(Fusion.CONFIGURATION_ELEMENT_TYPE);
+            return true;
+        }
+        if (id == R.id.action_add_mmfg) {
+            startCreateActivity(Mmfg.CONFIGURATION_ELEMENT_TYPE);
+            return true;
+        }
+        if (id == R.id.action_add_export) {
+            startCreateActivity(Export.CONFIGURATION_ELEMENT_TYPE);
             return true;
         }
         if (id == R.id.action_new) {
             String title = getResources().getString(R.string.dialog_new_process_flow_title);
             showAlertDialog(title, (dialog, which) -> {
-                mainService.createNewProcessFlow();
+                processFlowViewModel.newProcessFlow();
                 dialog.dismiss();
             });
             return true;
@@ -85,18 +100,15 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_import) {
             String title = getResources().getString(R.string.dialog_import_process_flow_title);
             showAlertDialog(title, (dialog, which) -> {
-                try {
-                    mainService.importProcessFlow(null);
-                    dialog.dismiss();
-                } catch (IOException | XmlPullParserException e) {
-                    e.printStackTrace();
-                }
+                startSelectFileActivity();
+                dialog.dismiss();
             });
             return true;
         }
         if (id == R.id.action_export) {
             try {
-                mainService.exportProcessFlow();
+                processFlowViewModel.exportProcessFlow();
+                Toast.makeText(this, "Export successful!", Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -104,6 +116,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void startSelectFileActivity() {
+        Intent intent = new Intent(this, SelectFileActivity.class);
+        startActivity(intent);
+    }
+
+    private void startCreateActivity(String configurationElementType) {
+        Intent intent = new Intent(this, CreateEditConfigurationElementActivity.class);
+        intent.putExtra(
+                CreateEditConfigurationElementActivity.CONFIGURATION_ELEMENT_TYPE,
+                configurationElementType);
+        startActivity(intent);
     }
 
     private void showAlertDialog(String title, DialogInterface.OnClickListener onClickListener) {

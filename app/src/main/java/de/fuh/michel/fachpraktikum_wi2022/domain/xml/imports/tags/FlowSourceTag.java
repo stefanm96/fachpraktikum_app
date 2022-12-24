@@ -9,7 +9,7 @@ public class FlowSourceTag implements XmlTag {
     public static final String TAG_NAME = "flow-source";
 
     @Override
-    public void apply(ProcessFlow processFlow, XmlPullParser xmlParser) {
+    public void apply(XmlPullParser xmlParser, ProcessFlow processFlow) {
         String name = xmlParser.getAttributeValue(null, "name");
 
         processFlow.addFlowSource(name);

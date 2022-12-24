@@ -19,7 +19,7 @@ import com.google.mlkit.vision.common.InputImage;
 import java.util.List;
 import java.util.function.Consumer;
 
-import de.fuh.michel.fachpraktikum_wi2022.view.BarcodeScannerActivity;
+import de.fuh.michel.fachpraktikum_wi2022.BarcodeScannerActivity;
 
 public class QrCodeAnalyzer implements ImageAnalysis.Analyzer {
 

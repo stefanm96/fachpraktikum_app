@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="de.fuh.michel.fachpraktikum_wi2022.view.MainActivity">
+    tools:context="de.fuh.michel.fachpraktikum_wi2022.MainActivity">
     <item
         android:id="@+id/action_add_definition"
         android:icon="@drawable/ic_baseline_qr_code_scanner_24"
@@ -13,7 +13,35 @@
         android:icon="@drawable/ic_baseline_add_24"
         android:title="@string/add"
         android:contentDescription="@string/content_description_favorite"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/action_add_parameter"
+                android:title="@string/add_parameter"
+                android:contentDescription="@string/content_description_favorite">
+            </item>
+            <item
+                android:id="@+id/action_add_flow_source"
+                android:title="@string/add_flow_source"
+                android:contentDescription="@string/content_description_favorite">
+            </item>
+            <item
+                android:id="@+id/action_add_fusion"
+                android:title="@string/add_fusion"
+                android:contentDescription="@string/content_description_favorite">
+            </item>
+            <item
+                android:id="@+id/action_add_mmfg"
+                android:title="@string/add_mmfg"
+                android:contentDescription="@string/content_description_favorite">
+            </item>
+            <item
+                android:id="@+id/action_add_export"
+                android:title="@string/add_export"
+                android:contentDescription="@string/content_description_favorite">
+            </item>
+        </menu>
+    </item>
     <item
         android:id="@+id/action_new"
         android:orderInCategory="100"

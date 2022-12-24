@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="de.fuh.michel.fachpraktikum_wi2022.CreateEditConfigurationElementActivity">
+    <item
+        android:id="@+id/action_delete_configuration_element"
+        android:icon="@drawable/ic_baseline_delete_24"
+        android:title="@string/delete"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_create_edit_configuration_element"
+        android:title="@string/save"
+        app:showAsAction="ifRoom" />
+</menu>

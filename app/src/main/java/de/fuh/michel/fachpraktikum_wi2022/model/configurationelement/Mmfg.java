@@ -7,6 +7,9 @@ import de.fuh.michel.fachpraktikum_wi2022.model.visitor.Visitor;
 
 public class Mmfg implements ConfigurationElement {
 
+    public static final String CONFIGURATION_ELEMENT_TYPE = "mmfg";
+
+
     private Set<String> processor;
 
     public Mmfg(Set<String> processor) {
@@ -16,6 +19,11 @@ public class Mmfg implements ConfigurationElement {
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public String getConfigurationElementType() {
+        return CONFIGURATION_ELEMENT_TYPE;
     }
 
     public Set<String> getProcessor() {

@@ -11,20 +11,21 @@ import java.io.StringReader;
 
 import de.fuh.michel.fachpraktikum_wi2022.domain.xml.imports.tags.XmlTag;
 import de.fuh.michel.fachpraktikum_wi2022.domain.xml.imports.tags.XmlTagFactory;
+import de.fuh.michel.fachpraktikum_wi2022.exception.ImportDefinitionFailedException;
 import de.fuh.michel.fachpraktikum_wi2022.model.Definition;
 import de.fuh.michel.fachpraktikum_wi2022.model.ProcessFlow;
 
-public class XmlImporter {
+public class XmlParser {
 
-    private static final String TAG = "XmlImporter";
+    private static final String TAG = "XmlParser";
 
     private final XmlTagFactory xmlTagFactory;
 
-    public XmlImporter(XmlTagFactory xmlTagFactory) {
+    public XmlParser(XmlTagFactory xmlTagFactory) {
         this.xmlTagFactory = xmlTagFactory;
     }
 
-    public ProcessFlow importProcessFlow(String xmlProcessFlow) throws XmlPullParserException, IOException {
+    public ProcessFlow parseProcessFlow(String xmlProcessFlow) throws XmlPullParserException, IOException {
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         factory.setNamespaceAware(false);
         XmlPullParser xmlParser = factory.newPullParser();
@@ -46,7 +47,7 @@ public class XmlImporter {
 
                     XmlTag xmlTag = xmlTagFactory.getXmlTag(tagName);
                     if (xmlTag != null) {
-                        xmlTag.apply(processFlow, xmlParser);
+                        xmlTag.apply(xmlParser, processFlow);
                     }
                 }
 
@@ -58,34 +59,39 @@ public class XmlImporter {
         }
     }
 
-    public Definition importDefinition(String content) throws XmlPullParserException, IOException {
-        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-        factory.setNamespaceAware(false);
-        XmlPullParser xmlParser = factory.newPullParser();
-        try (StringReader reader = new StringReader(content)) {
-            xmlParser.setInput(reader);
+    public Definition parseDefinition(String content) {
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            factory.setNamespaceAware(false);
+            XmlPullParser xmlParser = factory.newPullParser();
+            try (StringReader reader = new StringReader(content)) {
+                xmlParser.setInput(reader);
 
-            int eventType = xmlParser.getEventType();
+                int eventType = xmlParser.getEventType();
 
-            if (eventType != XmlPullParser.START_DOCUMENT) {
-                throw new IllegalArgumentException("Invalid XML Provided!");
-            }
-
-            while (eventType != XmlPullParser.END_DOCUMENT) {
-                if (eventType == XmlPullParser.START_TAG) {
-                    String tagName = xmlParser.getName();
-                    Log.i(TAG, "Start tag " + tagName);
-
-                    XmlTag xmlTag = xmlTagFactory.getXmlTag(tagName);
-                    if (xmlTag != null) {
-                        ProcessFlow processFlow = new ProcessFlow();
-                        xmlTag.apply(processFlow, xmlParser);
-                        return processFlow.getDefinitions().get(0);
-                    }
+                if (eventType != XmlPullParser.START_DOCUMENT) {
+                    throw new IllegalArgumentException("Invalid XML Provided!");
                 }
 
-                eventType = xmlParser.next();
+                while (eventType != XmlPullParser.END_DOCUMENT) {
+                    if (eventType == XmlPullParser.START_TAG) {
+                        String tagName = xmlParser.getName();
+                        Log.i(TAG, "Start tag " + tagName);
+
+                        XmlTag xmlTag = xmlTagFactory.getXmlTag(tagName);
+                        if (xmlTag != null) {
+                            ProcessFlow processFlow = new ProcessFlow();
+                            xmlTag.apply(xmlParser, processFlow);
+                            return processFlow.getDefinitions().get(0);
+                        }
+                    }
+
+                    eventType = xmlParser.next();
+                }
             }
+        } catch (XmlPullParserException | IOException e) {
+            e.printStackTrace();
+            throw new ImportDefinitionFailedException();
         }
 
         throw new IllegalArgumentException("Definition not found!");

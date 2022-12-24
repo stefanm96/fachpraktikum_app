@@ -9,7 +9,7 @@ public class ParamTag implements XmlTag {
     public static final String TAG_NAME = "param";
 
     @Override
-    public void apply(ProcessFlow processFlow, XmlPullParser xmlParser) {
+    public void apply(XmlPullParser xmlParser, ProcessFlow processFlow) {
         String name = xmlParser.getAttributeValue(null, "name");
         String value = xmlParser.getAttributeValue(null, "value");
 

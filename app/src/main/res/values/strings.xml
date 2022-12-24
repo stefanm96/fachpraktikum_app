@@ -21,9 +21,6 @@
 
     <string name="title_activity_tabbed">TabbedActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="configuration_list_fragment">Hello blank fragment</string>
-
     <string name="section_plugins">Plugins</string>
     <string name="section_fusions">Fusions</string>
     <string name="section_exporters">Exporters</string>
@@ -31,4 +28,28 @@
     <string name="title_activity_definition_detail_host">DefinitionDetailHostActivity</string>
     <string name="title_definition_list">Items</string>
     <string name="title_definition_detail">Definition Detail</string>
+    <string name="parameter_name">Param</string>
+    <string name="add_parameter">Parameter</string>
+    <string name="add_flow_source">Flow-Source</string>
+    <string name="add_fusion">Fusion</string>
+    <string name="add_mmfg">MMFG</string>
+    <string name="add_export">Export</string>
+    <string name="create_configuration_element">Create Configuration Element</string>
+    <string name="save">Save</string>
+    <string name="name">name</string>
+    <string name="value">value</string>
+    <string name="processor">Processor</string>
+    <string name="select_processors">Select Processors:</string>
+    <string name="target">Target</string>
+    <string name="exporter">Exporter</string>
+    <string name="parameter">Parameter</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="flow_source">Flow-Source</string>
+    <string name="delete">delete</string>
+    <string name="dialog_delete_configuration_element">This action cannot be reverted!</string>
+    <string name="select_file">Select File:</string>
+    <string name="fusion">Fusion</string>
+    <string name="mmfg">MMFG</string>
+    <string name="export">Export</string>
 </resources>
