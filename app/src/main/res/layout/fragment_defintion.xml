@@ -21,8 +21,8 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:padding="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
             tools:text="@tools:sample/cities" />
 
     </RelativeLayout>

@@ -13,14 +13,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text=""
-            android:textAppearance="?attr/textAppearanceHeadline5" />
+            android:paddingStart="8dp"
+            android:text="Header"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/section_recycler_view"
+        <de.fuh.michel.fachpraktikum_wi2022.view.definition.DefinitionListView
+            android:id="@+id/section_list_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </layout>

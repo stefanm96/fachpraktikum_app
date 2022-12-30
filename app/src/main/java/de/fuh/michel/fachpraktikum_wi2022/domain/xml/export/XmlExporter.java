@@ -5,10 +5,10 @@ import android.util.Log;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import de.fuh.michel.fachpraktikum_wi2022.domain.xml.file.FileWriter;
 import de.fuh.michel.fachpraktikum_wi2022.exception.ExportFailedException;
 import de.fuh.michel.fachpraktikum_wi2022.model.ProcessFlow;
 
@@ -18,11 +18,11 @@ public class XmlExporter {
     public static final String EXTENSION = ".xml";
 
     private final XmlSerializer xmlSerializer;
-    private final File filesDir;
+    private final FileWriter fileWriter;
 
-    public XmlExporter(XmlSerializer xmlSerializer, File filesDir) {
+    public XmlExporter(XmlSerializer xmlSerializer, FileWriter fileWriter) {
         this.xmlSerializer = xmlSerializer;
-        this.filesDir = filesDir;
+        this.fileWriter = fileWriter;
     }
 
     public void exportProcessFlow(ProcessFlow processFlow) {
@@ -38,20 +38,12 @@ public class XmlExporter {
             xmlSerializer.setOutput(null);
 
             Log.i(TAG, writer.toString());
-            writeToFile(processFlow, writer);
+            fileWriter.writeToFile(processFlow.getName() + EXTENSION, writer.toString());
             Log.i(TAG, "Exporting finished successfully!");
         } catch (IOException e) {
             Log.e(TAG, "Exporting failed!");
             e.printStackTrace();
             throw new ExportFailedException();
         }
-    }
-
-    private void writeToFile(ProcessFlow processFlow, StringWriter writer) throws IOException {
-        File outputFile = new File(filesDir, processFlow.getName() + EXTENSION);
-        FileWriter fileWriter = new FileWriter(outputFile);
-        fileWriter.write(writer.toString());
-        fileWriter.flush();
-        fileWriter.close();
     }
 }

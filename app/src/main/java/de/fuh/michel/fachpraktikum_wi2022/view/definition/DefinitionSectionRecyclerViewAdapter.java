@@ -2,10 +2,14 @@ package de.fuh.michel.fachpraktikum_wi2022.view.definition;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +19,7 @@ import java.util.stream.Collectors;
 
 import de.fuh.michel.fachpraktikum_wi2022.R;
 import de.fuh.michel.fachpraktikum_wi2022.databinding.FragmentDefinitionSectionRowBinding;
+import de.fuh.michel.fachpraktikum_wi2022.databinding.ListItemBinding;
 import de.fuh.michel.fachpraktikum_wi2022.model.Definition;
 import de.fuh.michel.fachpraktikum_wi2022.model.definition.ExportDefinition;
 import de.fuh.michel.fachpraktikum_wi2022.model.definition.FusionDefinition;
@@ -38,11 +43,15 @@ public class DefinitionSectionRecyclerViewAdapter
             ResourceDefinition.DEFINITION_TYPE};
 
     private final ProcessFlowViewModel processFlowViewModel;
+    private final DefinitionClickListener clickListener;
     private final Context context;
 
-    public DefinitionSectionRecyclerViewAdapter(Context context, ProcessFlowViewModel processFlowViewModel) {
+    public DefinitionSectionRecyclerViewAdapter(Context context,
+                                                ProcessFlowViewModel processFlowViewModel,
+                                                DefinitionClickListener clickListener) {
         this.context = context;
         this.processFlowViewModel = processFlowViewModel;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -56,19 +65,20 @@ public class DefinitionSectionRecyclerViewAdapter
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String currentSection = context.getResources().getString(SECTION_TITLES[position]);
-        String currentDefinitionType = DEFINITION_TYPES[position];
         holder.sectionHeader.setText(currentSection);
 
-        DefinitionRecyclerViewAdapter definitionRecyclerViewAdapter = new DefinitionRecyclerViewAdapter(currentDefinitionType);
-
-        definitionRecyclerViewAdapter.setClickListener(processFlowViewModel::removeDefinition);
+        DefinitionListAdapter listViewAdapter = new DefinitionListAdapter();
 
         processFlowViewModel.getDefinitionsLiveData().observe((LifecycleOwner) context, list -> {
             List<Definition> definitionsByType = getDefinitionsByType(DEFINITION_TYPES[position], list);
-            definitionRecyclerViewAdapter.submitList(definitionsByType);
+            listViewAdapter.setList(definitionsByType);
         });
 
-        holder.sectionRecyclerView.setAdapter(definitionRecyclerViewAdapter);
+        holder.sectionListView.setAdapter(listViewAdapter);
+        holder.sectionListView.setOnItemClickListener((parent, view, itemPosition, id) -> {
+            Definition definition = listViewAdapter.getItem(itemPosition);
+            clickListener.onClick(definition);
+        });
     }
 
     private static List<Definition> getDefinitionsByType(String currentDefinitionType, List<Definition> list) {
@@ -79,18 +89,22 @@ public class DefinitionSectionRecyclerViewAdapter
 
     @Override
     public int getItemCount() {
-        return 4;
+        return SECTION_TITLES.length;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView sectionHeader;
-        RecyclerView sectionRecyclerView;
+        ListView sectionListView;
 
         public ViewHolder(@NonNull FragmentDefinitionSectionRowBinding binding) {
             super(binding.getRoot());
 
             sectionHeader = binding.sectionHeader;
-            sectionRecyclerView = binding.sectionRecyclerView;
+            sectionListView = binding.sectionListView;
         }
+    }
+
+    public interface DefinitionClickListener {
+        void onClick(Definition definition);
     }
 }

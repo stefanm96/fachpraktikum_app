@@ -81,4 +81,8 @@ public class CreateConfigurationElementViewModel extends ViewModel {
         newSet.remove(pluginName);
         processorsLiveData.postValue(newSet);
     }
+
+    public void setProcessor(String processor) {
+        processorLiveData.postValue(processor);
+    }
 }

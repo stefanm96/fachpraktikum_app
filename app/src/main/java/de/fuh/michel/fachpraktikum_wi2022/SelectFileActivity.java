@@ -7,10 +7,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.IOException;
-
 import de.fuh.michel.fachpraktikum_wi2022.databinding.ActivitySelectFileBinding;
-import de.fuh.michel.fachpraktikum_wi2022.domain.xml.FileProvider;
+import de.fuh.michel.fachpraktikum_wi2022.domain.xml.file.FileProvider;
 import de.fuh.michel.fachpraktikum_wi2022.view.ProcessFlowViewModel;
 
 public class SelectFileActivity extends AppCompatActivity {
@@ -43,6 +41,7 @@ public class SelectFileActivity extends AppCompatActivity {
         try {
             String fileContent = fileProvider.getFileContent(selectedFilename);
             processFlowViewModel.importProcessFlow(fileContent);
+            Toast.makeText(this, "Import successful!", Toast.LENGTH_SHORT).show();
             finish();
         } catch (Exception e) {
             e.printStackTrace();

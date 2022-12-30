@@ -74,7 +74,6 @@ public class ConfigurationListFragment extends Fragment {
     private boolean handleDragAndDrop(FragmentConfigurationListBinding binding, DragEvent dragEvent) {
         switch (dragEvent.getAction()) {
             case DragEvent.ACTION_DROP:
-                // Handle drop here
                 String fromPositionString =
                         dragEvent.getClipData().getItemAt(0).getText().toString();
                 int fromPosition = Integer.parseInt(fromPositionString);

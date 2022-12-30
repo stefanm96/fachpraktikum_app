@@ -33,7 +33,8 @@ public class ConfigurationListItemViewBuilderFactory {
         ConfigurationListItemViewBuilder viewBuilder = builderMap.get(builderName);
 
         if (viewBuilder == null) {
-            throw new IllegalArgumentException("XML Tag not found: " + builderName);
+            throw new IllegalArgumentException("ConfigurationListItemViewBuilder not found: "
+                    + builderName);
         }
 
         return viewBuilder;

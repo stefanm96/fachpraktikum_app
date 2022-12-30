@@ -35,20 +35,18 @@ public class CreateEditConfigurationElementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragment_container_view, CreateConfigurationElementContentFragment.class, null)
-                    .commit();
-        }
-
         binding = ActivityCreateConfigurationElementBinding.inflate(getLayoutInflater());
         createViewModel = new ViewModelProvider(this).get(CreateConfigurationElementViewModel.class);
         processFlowViewModel = ((GmafApplication) getApplication()).getProcessFlowViewModel();
         configurationElementType = getIntent().getStringExtra(CONFIGURATION_ELEMENT_TYPE);
         position = getIntent().getIntExtra(POSITION, -1);
 
-        setTitle("Create " + getIntent().getStringExtra(CONFIGURATION_ELEMENT_TYPE));
+        if (isCreateView()) {
+            setTitle("Create " + getIntent().getStringExtra(CONFIGURATION_ELEMENT_TYPE));
+        } else {
+            setTitle("Edit " + getIntent().getStringExtra(CONFIGURATION_ELEMENT_TYPE));
+        }
+
         setContentView(binding.getRoot());
     }
 
@@ -60,9 +58,9 @@ public class CreateEditConfigurationElementActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem item = menu.findItem(R.id.action_delete_configuration_element);
-        if (position == -1) {
-            item.setVisible(false);
+        MenuItem deleteButton = menu.findItem(R.id.action_delete_configuration_element);
+        if (isCreateView()) {
+            deleteButton.setVisible(false);
         }
         return true;
     }
@@ -73,11 +71,10 @@ public class CreateEditConfigurationElementActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_create_edit_configuration_element) {
-            // use intent to create
             ConfigurationElement configurationElement =
                     createViewModel.createConfigurationElementOfType(configurationElementType);
 
-            if (position == -1) {
+            if (isCreateView()) {
                 addConfigurationElement(configurationElement);
             } else {
                 editConfigurationElement(position, configurationElement);
@@ -95,6 +92,10 @@ public class CreateEditConfigurationElementActivity extends AppCompatActivity {
             finish();
         }
         return true;
+    }
+
+    private boolean isCreateView() {
+        return getIntent().getIntExtra(POSITION, -1) == -1;
     }
 
     private void deleteConfigurationElement(int position) {

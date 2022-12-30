@@ -7,23 +7,12 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.List;
 
-import de.fuh.michel.fachpraktikum_wi2022.databinding.FragmentConfigurationListItemBinding;
-import de.fuh.michel.fachpraktikum_wi2022.databinding.FragmentFlowSourceListItemBinding;
-import de.fuh.michel.fachpraktikum_wi2022.databinding.FragmentFusionListItemBinding;
-import de.fuh.michel.fachpraktikum_wi2022.databinding.FragmentParameterListItemBinding;
 import de.fuh.michel.fachpraktikum_wi2022.model.ConfigurationElement;
-import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Export;
-import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.FlowSource;
-import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Fusion;
-import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Mmfg;
-import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Parameter;
 import de.fuh.michel.fachpraktikum_wi2022.view.configurationelement.list.builder.ConfigurationListItemViewBuilder;
 import de.fuh.michel.fachpraktikum_wi2022.view.configurationelement.list.builder.ConfigurationListItemViewBuilderFactory;
-import de.fuh.michel.fachpraktikum_wi2022.view.configurationelement.list.builder.ParameterListItemViewBuilder;
 
 public class ConfigurationListAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
 

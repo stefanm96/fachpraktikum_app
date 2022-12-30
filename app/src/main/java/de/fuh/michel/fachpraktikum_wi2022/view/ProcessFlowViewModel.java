@@ -109,28 +109,32 @@ public class ProcessFlowViewModel extends ViewModel {
         return configurationElementsLiveData;
     }
 
-    public void removeDefinition(Definition definition) {
-        applyToLiveDataList(definitionsLiveData, list -> list.remove(definition));
-    }
-
     public void addDefinition(Definition definition) {
         applyToLiveDataList(definitionsLiveData, list -> list.add(definition));
+    }
+
+    public Definition getDefinition(int definitionPosition) {
+        return definitionsLiveData.getValue().get(definitionPosition);
+    }
+
+    public void removeDefinition(Definition definition) {
+        applyToLiveDataList(definitionsLiveData, list -> list.remove(definition));
     }
 
     public void addConfigurationElement(ConfigurationElement configurationElement) {
         applyToLiveDataList(configurationElementsLiveData, list -> list.add(configurationElement));
     }
 
-    public void removeConfigurationElement(int position) {
-        applyToLiveDataList(configurationElementsLiveData, list -> list.remove(position));
+    public void editConfigurationElement(int position, ConfigurationElement configurationElement) {
+        applyToLiveDataList(configurationElementsLiveData, list -> list.set(position, configurationElement));
     }
 
     public void swapConfigurationElements(int fromPosition, int toPosition) {
         applyToLiveDataList(configurationElementsLiveData, list -> Collections.swap(list, fromPosition, toPosition));
     }
 
-    public void editConfigurationElement(int position, ConfigurationElement configurationElement) {
-        applyToLiveDataList(configurationElementsLiveData, list -> list.set(position, configurationElement));
+    public void removeConfigurationElement(int position) {
+        applyToLiveDataList(configurationElementsLiveData, list -> list.remove(position));
     }
 
     private <T> void applyToLiveDataList(MutableLiveData<List<T>> liveDataList, Consumer<List<T>> listConsumer) {

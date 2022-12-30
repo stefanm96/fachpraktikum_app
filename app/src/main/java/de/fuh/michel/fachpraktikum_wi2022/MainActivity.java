@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+    private ActivityMainBinding binding;
     private ProcessFlowViewModel processFlowViewModel;
 
     @Override
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         processFlowViewModel = ((GmafApplication) getApplication()).getProcessFlowViewModel();
 
-        de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Tabs
@@ -142,5 +143,13 @@ public class MainActivity extends AppCompatActivity {
         alertDialogBuilder.setPositiveButton(getResources().getString(R.string.accept), onClickListener);
 
         alertDialogBuilder.show();
+    }
+
+    public ActivityMainBinding getBinding() {
+        return binding;
+    }
+
+    public ProcessFlowViewModel getProcessFlowViewModel() {
+        return processFlowViewModel;
     }
 }

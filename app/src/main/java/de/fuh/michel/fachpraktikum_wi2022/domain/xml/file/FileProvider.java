@@ -1,4 +1,4 @@
-package de.fuh.michel.fachpraktikum_wi2022.domain.xml;
+package de.fuh.michel.fachpraktikum_wi2022.domain.xml.file;
 
 import android.util.Log;
 

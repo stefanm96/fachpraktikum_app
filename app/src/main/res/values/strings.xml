@@ -48,8 +48,12 @@
     <string name="flow_source">Flow-Source</string>
     <string name="delete">delete</string>
     <string name="dialog_delete_configuration_element">This action cannot be reverted!</string>
+    <string name="dialog_delete_definition">This action cannot be reverted!</string>
     <string name="select_file">Select File:</string>
     <string name="fusion">Fusion</string>
     <string name="mmfg">MMFG</string>
     <string name="export">Export</string>
+    <string name="type">Type:</string>
+    <string name="location">Location:</string>
+    <string name="clazz">Class:</string>
 </resources>

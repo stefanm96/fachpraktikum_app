@@ -9,9 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/definition_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"
+        android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/fragment_definition_section_row" />
 </LinearLayout>
