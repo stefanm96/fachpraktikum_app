@@ -100,7 +100,7 @@ public class DefinitionDetailsActivity extends AppCompatActivity {
     private void showAlertDialog(String title, DialogInterface.OnClickListener onClickListener) {
         MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(this)
                 .setTitle(title)
-                .setMessage(getResources().getString(R.string.dialog_delete_definition));
+                .setMessage(getResources().getString(R.string.dialog_delete_confirmation_message));
 
         alertDialogBuilder.setNeutralButton(getResources().getString(R.string.cancel),
                 (dialog, which) -> dialog.cancel());

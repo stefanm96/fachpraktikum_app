@@ -25,14 +25,21 @@
         <activity
             android:name=".DefinitionDetailsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity">
-        </activity>
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".CreateEditProcessFlowActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SelectFileActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".CreateEditConfigurationElementActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".BarcodeScannerActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
@@ -49,10 +56,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".BarcodeScannerActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="de.fuh.michel.fachpraktikum_wi2022.CreateEditProcessFlowActivity">
+
+    <item
+        android:id="@+id/action_new_process_flow"
+        android:title="@string/new_process_flow"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_save_process_flow"
+        android:title="@string/save"
+        app:showAsAction="ifRoom" />
+</menu>

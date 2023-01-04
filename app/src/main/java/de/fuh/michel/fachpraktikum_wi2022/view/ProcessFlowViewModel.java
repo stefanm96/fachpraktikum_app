@@ -89,18 +89,6 @@ public class ProcessFlowViewModel extends ViewModel {
                 .collect(Collectors.toList());
     }
 
-    public MutableLiveData<String> getNameLiveData() {
-        return nameLiveData;
-    }
-
-    public MutableLiveData<String> getExtensionLiveData() {
-        return extensionLiveData;
-    }
-
-    public MutableLiveData<Boolean> getIsGeneralLiveData() {
-        return isGeneralLiveData;
-    }
-
     public MutableLiveData<List<Definition>> getDefinitionsLiveData() {
         return definitionsLiveData;
     }
@@ -141,5 +129,29 @@ public class ProcessFlowViewModel extends ViewModel {
         List<T> newList = liveDataList.getValue();
         listConsumer.accept(newList);
         liveDataList.postValue(newList);
+    }
+
+    public String getName() {
+        return nameLiveData.getValue();
+    }
+
+    public String getExtension() {
+        return extensionLiveData.getValue();
+    }
+
+    public boolean getIsGeneral() {
+        return Boolean.TRUE.equals(isGeneralLiveData.getValue());
+    }
+
+    public void setName(String name) {
+        nameLiveData.postValue(name);
+    }
+
+    public void setExtension(String extension) {
+        extensionLiveData.postValue(extension);
+    }
+
+    public void setIsGeneral(boolean isGeneral) {
+        isGeneralLiveData.postValue(isGeneral);
     }
 }

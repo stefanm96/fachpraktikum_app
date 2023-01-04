@@ -14,6 +14,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 
 import de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityMainBinding;
+import de.fuh.michel.fachpraktikum_wi2022.model.ProcessFlow;
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Export;
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.FlowSource;
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Fusion;
@@ -90,12 +91,10 @@ public class MainActivity extends AppCompatActivity {
             startCreateActivity(Export.CONFIGURATION_ELEMENT_TYPE);
             return true;
         }
-        if (id == R.id.action_new) {
-            String title = getResources().getString(R.string.dialog_new_process_flow_title);
-            showAlertDialog(title, (dialog, which) -> {
-                processFlowViewModel.newProcessFlow();
-                dialog.dismiss();
-            });
+        if (id == R.id.action_edit) {
+            Intent intent = new Intent(this, CreateEditProcessFlowActivity.class);
+            intent.putExtra(CreateEditProcessFlowActivity.PROCESS_FLOW, true);
+            startActivity(intent);
             return true;
         }
         if (id == R.id.action_import) {

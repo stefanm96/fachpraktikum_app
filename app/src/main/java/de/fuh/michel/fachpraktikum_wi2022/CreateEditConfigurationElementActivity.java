@@ -13,7 +13,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityCreateConfigurationElementBinding;
 import de.fuh.michel.fachpraktikum_wi2022.model.ConfigurationElement;
-import de.fuh.michel.fachpraktikum_wi2022.view.configurationelement.CreateConfigurationElementContentFragment;
 import de.fuh.michel.fachpraktikum_wi2022.view.configurationelement.CreateConfigurationElementViewModel;
 import de.fuh.michel.fachpraktikum_wi2022.view.ProcessFlowViewModel;
 
@@ -125,7 +124,7 @@ public class CreateEditConfigurationElementActivity extends AppCompatActivity {
     private void showAlertDialog(String title, DialogInterface.OnClickListener onClickListener) {
         MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(this)
                 .setTitle(title)
-                .setMessage(getResources().getString(R.string.dialog_delete_configuration_element));
+                .setMessage(getResources().getString(R.string.dialog_delete_confirmation_message));
 
         alertDialogBuilder.setNeutralButton(getResources().getString(R.string.cancel),
                 (dialog, which) -> dialog.cancel());

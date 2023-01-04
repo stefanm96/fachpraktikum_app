@@ -36,19 +36,16 @@
     <string name="add_export">Export</string>
     <string name="create_configuration_element">Create Configuration Element</string>
     <string name="save">Save</string>
-    <string name="name">name</string>
+    <string name="name">Name</string>
     <string name="value">value</string>
     <string name="processor">Processor</string>
     <string name="select_processors">Select Processors:</string>
     <string name="target">Target</string>
     <string name="exporter">Exporter</string>
     <string name="parameter">Parameter</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="flow_source">Flow-Source</string>
     <string name="delete">delete</string>
-    <string name="dialog_delete_configuration_element">This action cannot be reverted!</string>
-    <string name="dialog_delete_definition">This action cannot be reverted!</string>
+    <string name="dialog_delete_confirmation_message">This action cannot be reverted!</string>
     <string name="select_file">Select File:</string>
     <string name="fusion">Fusion</string>
     <string name="mmfg">MMFG</string>
@@ -56,4 +53,9 @@
     <string name="type">Type:</string>
     <string name="location">Location:</string>
     <string name="clazz">Class:</string>
+    <string name="extension">Extension</string>
+    <string name="is_general">IsGeneral</string>
+    <string name="action_edit">Edit Process Flow</string>
+    <string name="new_process_flow">New</string>
+    <string name="title_edit_process_flow">Edit Process Flow</string>
 </resources>
