@@ -20,14 +20,14 @@ public class XmlParser {
     private static final String TAG = "XmlParser";
 
     private final XmlTagFactory xmlTagFactory;
+    private final XmlPullParserFactory factory;
 
-    public XmlParser(XmlTagFactory xmlTagFactory) {
+    public XmlParser(XmlTagFactory xmlTagFactory, XmlPullParserFactory factory) {
         this.xmlTagFactory = xmlTagFactory;
+        this.factory = factory;
     }
 
     public ProcessFlow parseProcessFlow(String xmlProcessFlow) throws XmlPullParserException, IOException {
-        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-        factory.setNamespaceAware(false);
         XmlPullParser xmlParser = factory.newPullParser();
         try (StringReader reader = new StringReader(xmlProcessFlow)) {
             xmlParser.setInput(reader);
@@ -61,8 +61,6 @@ public class XmlParser {
 
     public Definition parseDefinition(String content) {
         try {
-            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            factory.setNamespaceAware(false);
             XmlPullParser xmlParser = factory.newPullParser();
             try (StringReader reader = new StringReader(content)) {
                 xmlParser.setInput(reader);

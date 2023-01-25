@@ -13,8 +13,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityCreateConfigurationElementBinding;
 import de.fuh.michel.fachpraktikum_wi2022.model.ConfigurationElement;
-import de.fuh.michel.fachpraktikum_wi2022.view.configurationelement.CreateConfigurationElementViewModel;
 import de.fuh.michel.fachpraktikum_wi2022.view.ProcessFlowViewModel;
+import de.fuh.michel.fachpraktikum_wi2022.view.configurationelement.CreateConfigurationElementViewModel;
 
 public class CreateEditConfigurationElementActivity extends AppCompatActivity {
 
@@ -24,7 +24,6 @@ public class CreateEditConfigurationElementActivity extends AppCompatActivity {
 
     private static final String TAG = "CreateEditConfigurationElementActivity";
 
-    private ActivityCreateConfigurationElementBinding binding;
     private ProcessFlowViewModel processFlowViewModel;
     private CreateConfigurationElementViewModel createViewModel;
     private String configurationElementType;
@@ -34,7 +33,7 @@ public class CreateEditConfigurationElementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityCreateConfigurationElementBinding.inflate(getLayoutInflater());
+        de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityCreateConfigurationElementBinding binding = ActivityCreateConfigurationElementBinding.inflate(getLayoutInflater());
         createViewModel = new ViewModelProvider(this).get(CreateConfigurationElementViewModel.class);
         processFlowViewModel = ((GmafApplication) getApplication()).getProcessFlowViewModel();
         configurationElementType = getIntent().getStringExtra(CONFIGURATION_ELEMENT_TYPE);

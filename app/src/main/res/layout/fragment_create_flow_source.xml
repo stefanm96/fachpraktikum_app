@@ -25,6 +25,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
 
         <AutoCompleteTextView
+            android:id="@+id/name_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:completionThreshold="0"

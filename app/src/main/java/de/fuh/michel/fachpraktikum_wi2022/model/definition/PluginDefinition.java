@@ -7,8 +7,8 @@ public class PluginDefinition implements Definition {
 
     public static final String DEFINITION_TYPE = "plugin";
 
-    private String name;
-    private String clazz;
+    private final String name;
+    private final String clazz;
 
     public PluginDefinition(String name, String clazz) {
         this.name = name;

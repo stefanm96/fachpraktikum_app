@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import de.fuh.michel.fachpraktikum_wi2022.databinding.FragmentFusionListItemBinding;
 import de.fuh.michel.fachpraktikum_wi2022.databinding.FragmentMmfgListItemBinding;
 import de.fuh.michel.fachpraktikum_wi2022.model.ConfigurationElement;
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Mmfg;

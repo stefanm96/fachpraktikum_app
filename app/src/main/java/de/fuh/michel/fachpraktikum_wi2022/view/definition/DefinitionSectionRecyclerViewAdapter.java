@@ -2,14 +2,11 @@ package de.fuh.michel.fachpraktikum_wi2022.view.definition;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +16,6 @@ import java.util.stream.Collectors;
 
 import de.fuh.michel.fachpraktikum_wi2022.R;
 import de.fuh.michel.fachpraktikum_wi2022.databinding.FragmentDefinitionSectionRowBinding;
-import de.fuh.michel.fachpraktikum_wi2022.databinding.ListItemBinding;
 import de.fuh.michel.fachpraktikum_wi2022.model.Definition;
 import de.fuh.michel.fachpraktikum_wi2022.model.definition.ExportDefinition;
 import de.fuh.michel.fachpraktikum_wi2022.model.definition.FusionDefinition;

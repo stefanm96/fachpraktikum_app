@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
 
-
 import com.google.mlkit.vision.barcode.BarcodeScanner;
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions;
 import com.google.mlkit.vision.barcode.BarcodeScanning;
@@ -23,12 +22,8 @@ import de.fuh.michel.fachpraktikum_wi2022.BarcodeScannerActivity;
 
 public class QrCodeAnalyzer implements ImageAnalysis.Analyzer {
 
-    private AppCompatActivity context;
-    private Consumer<String> qrCodeListener;
-
-    public QrCodeAnalyzer(AppCompatActivity context) {
-        this.context = context;
-    }
+    private final AppCompatActivity context;
+    private final Consumer<String> qrCodeListener;
 
     public QrCodeAnalyzer(BarcodeScannerActivity context, Consumer<String> qrCodeListener) {
         this.context = context;

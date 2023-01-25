@@ -7,8 +7,8 @@ public class FusionDefinition implements Definition {
 
     public static final String DEFINITION_TYPE = "fusion";
 
-    private String name;
-    private String clazz;
+    private final String name;
+    private final String clazz;
 
     public FusionDefinition(String name, String clazz) {
         this.name = name;

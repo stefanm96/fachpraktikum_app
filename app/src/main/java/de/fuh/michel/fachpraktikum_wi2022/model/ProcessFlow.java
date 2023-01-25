@@ -2,6 +2,7 @@ package de.fuh.michel.fachpraktikum_wi2022.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Export;
@@ -119,5 +120,18 @@ public class ProcessFlow implements Visitable {
                 ", definitionMap=" + definitions +
                 ", configurationElements=" + configurationElements +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProcessFlow)) return false;
+        ProcessFlow that = (ProcessFlow) o;
+        return isGeneral == that.isGeneral && Objects.equals(name, that.name) && Objects.equals(extension, that.extension) && Objects.equals(definitions, that.definitions) && Objects.equals(configurationElements, that.configurationElements);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, extension, isGeneral, definitions, configurationElements);
     }
 }

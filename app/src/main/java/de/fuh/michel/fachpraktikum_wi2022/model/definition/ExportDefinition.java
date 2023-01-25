@@ -7,8 +7,8 @@ public class ExportDefinition implements Definition {
 
     public static final String DEFINITION_TYPE = "export";
 
-    private String name;
-    private String clazz;
+    private final String name;
+    private final String clazz;
 
     public ExportDefinition(String name, String clazz) {
         this.name = name;

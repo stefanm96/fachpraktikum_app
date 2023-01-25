@@ -7,9 +7,9 @@ public class ResourceDefinition implements Definition {
 
     public static final String DEFINITION_TYPE = "resource";
 
-    private String name;
-    private String type;
-    private String location;
+    private final String name;
+    private final String type;
+    private final String location;
 
     public ResourceDefinition(String name, String type, String location) {
         this.name = name;

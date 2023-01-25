@@ -8,12 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.dialog.MaterialDialogs;
-
-import de.fuh.michel.fachpraktikum_wi2022.CreateEditConfigurationElementActivity;
 import de.fuh.michel.fachpraktikum_wi2022.DefinitionDetailsActivity;
-import de.fuh.michel.fachpraktikum_wi2022.R;
 import de.fuh.michel.fachpraktikum_wi2022.databinding.FragmentDefinitionListBinding;
 import de.fuh.michel.fachpraktikum_wi2022.model.Definition;
 import de.fuh.michel.fachpraktikum_wi2022.view.ProcessFlowViewModel;

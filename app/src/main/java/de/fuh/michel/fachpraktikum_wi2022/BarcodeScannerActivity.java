@@ -56,7 +56,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
         checkIfCameraPermissionIsGranted();
     }
 
-    private void checkCameraPermission() {
+    public void checkCameraPermission() {
         try {
             String[] requiredPermissions = {Manifest.permission.CAMERA};
             ActivityCompat.requestPermissions(this, requiredPermissions, 0);
@@ -65,7 +65,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
         }
     }
 
-    private void checkIfCameraPermissionIsGranted() {
+    void checkIfCameraPermissionIsGranted() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             // Permission granted: start the preview
             startCamera();
@@ -74,9 +74,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
             MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(this);
             dialogBuilder.setTitle("Permission required");
             dialogBuilder.setMessage("This application needs to access the camera to process barcodes");
-            dialogBuilder.setPositiveButton("Ok", (dialog, which) -> {
-                checkCameraPermission();
-            });
+            dialogBuilder.setPositiveButton("Ok", (dialog, which) -> checkCameraPermission());
 
             AlertDialog alertDialog = dialogBuilder.setCancelable(false).create();
             alertDialog.setCanceledOnTouchOutside(false);
@@ -84,7 +82,7 @@ public class BarcodeScannerActivity extends AppCompatActivity {
         }
     }
 
-    private void startCamera() {
+    public void startCamera() {
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture =
                 ProcessCameraProvider.getInstance(this);
 

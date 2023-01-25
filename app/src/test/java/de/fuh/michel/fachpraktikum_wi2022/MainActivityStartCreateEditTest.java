@@ -1,13 +1,10 @@
 package de.fuh.michel.fachpraktikum_wi2022;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.content.Intent;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import org.junit.Before;

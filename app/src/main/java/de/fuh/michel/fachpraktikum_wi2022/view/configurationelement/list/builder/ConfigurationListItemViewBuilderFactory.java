@@ -3,11 +3,6 @@ package de.fuh.michel.fachpraktikum_wi2022.view.configurationelement.list.builde
 import java.util.HashMap;
 import java.util.Map;
 
-import de.fuh.michel.fachpraktikum_wi2022.domain.xml.imports.tags.ExportTag;
-import de.fuh.michel.fachpraktikum_wi2022.domain.xml.imports.tags.FlowSourceTag;
-import de.fuh.michel.fachpraktikum_wi2022.domain.xml.imports.tags.FusionTag;
-import de.fuh.michel.fachpraktikum_wi2022.domain.xml.imports.tags.MmfgTag;
-import de.fuh.michel.fachpraktikum_wi2022.domain.xml.imports.tags.ParamTag;
 import de.fuh.michel.fachpraktikum_wi2022.model.ConfigurationElement;
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Export;
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.FlowSource;

@@ -14,15 +14,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 
 import de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityMainBinding;
-import de.fuh.michel.fachpraktikum_wi2022.model.ProcessFlow;
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Export;
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.FlowSource;
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Fusion;
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Mmfg;
 import de.fuh.michel.fachpraktikum_wi2022.model.configurationelement.Parameter;
-import de.fuh.michel.fachpraktikum_wi2022.view.configurationelement.list.ConfigurationListFragment;
 import de.fuh.michel.fachpraktikum_wi2022.view.ProcessFlowViewModel;
 import de.fuh.michel.fachpraktikum_wi2022.view.TabPagerAdapter;
+import de.fuh.michel.fachpraktikum_wi2022.view.configurationelement.list.ConfigurationListFragment;
 import de.fuh.michel.fachpraktikum_wi2022.view.definition.DefinitionListFragment;
 
 public class MainActivity extends AppCompatActivity {

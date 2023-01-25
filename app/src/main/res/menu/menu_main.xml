@@ -17,29 +17,19 @@
         <menu>
             <item
                 android:id="@+id/action_add_parameter"
-                android:title="@string/add_parameter"
-                android:contentDescription="@string/content_description_favorite">
-            </item>
+                android:title="@string/add_parameter"></item>
             <item
                 android:id="@+id/action_add_flow_source"
-                android:title="@string/add_flow_source"
-                android:contentDescription="@string/content_description_favorite">
-            </item>
+                android:title="@string/add_flow_source"></item>
             <item
                 android:id="@+id/action_add_fusion"
-                android:title="@string/add_fusion"
-                android:contentDescription="@string/content_description_favorite">
-            </item>
+                android:title="@string/add_fusion"></item>
             <item
                 android:id="@+id/action_add_mmfg"
-                android:title="@string/add_mmfg"
-                android:contentDescription="@string/content_description_favorite">
-            </item>
+                android:title="@string/add_mmfg"></item>
             <item
                 android:id="@+id/action_add_export"
-                android:title="@string/add_export"
-                android:contentDescription="@string/content_description_favorite">
-            </item>
+                android:title="@string/add_export"></item>
         </menu>
     </item>
     <item

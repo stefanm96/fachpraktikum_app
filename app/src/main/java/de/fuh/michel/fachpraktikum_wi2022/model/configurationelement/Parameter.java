@@ -1,7 +1,5 @@
 package de.fuh.michel.fachpraktikum_wi2022.model.configurationelement;
 
-import java.util.Objects;
-
 import de.fuh.michel.fachpraktikum_wi2022.model.ConfigurationElement;
 import de.fuh.michel.fachpraktikum_wi2022.model.visitor.Visitor;
 
