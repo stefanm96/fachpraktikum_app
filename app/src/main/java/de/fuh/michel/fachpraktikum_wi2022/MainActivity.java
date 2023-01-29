@@ -113,6 +113,14 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         }
+        if (id == R.id.action_share) {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            String processFlowContent = processFlowViewModel.getProcessFlowContent();
+            shareIntent.putExtra(Intent.EXTRA_TEXT, processFlowContent);
+            startActivity(Intent.createChooser(shareIntent, "Share using"));
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

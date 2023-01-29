@@ -19,8 +19,8 @@ public class SelectFileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setProcessFlowViewModel(((GmafApplication) getApplication()).getProcessFlowViewModel());
-        setFileProvider(((GmafApplication) getApplication()).getFileProvider());
+        processFlowViewModel = ((GmafApplication) getApplication()).getProcessFlowViewModel();
+        fileProvider = ((GmafApplication) getApplication()).getFileProvider();
 
         ActivitySelectFileBinding binding = ActivitySelectFileBinding.inflate(getLayoutInflater());
 
@@ -47,13 +47,5 @@ public class SelectFileActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, "Import failed!", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public void setFileProvider(FileProvider fileProvider) {
-        this.fileProvider = fileProvider;
-    }
-
-    public void setProcessFlowViewModel(ProcessFlowViewModel processFlowViewModel) {
-        this.processFlowViewModel = processFlowViewModel;
     }
 }

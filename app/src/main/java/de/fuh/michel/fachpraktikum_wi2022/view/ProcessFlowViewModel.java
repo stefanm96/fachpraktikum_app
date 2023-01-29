@@ -41,10 +41,6 @@ public class ProcessFlowViewModel extends ViewModel {
         configurationElementsLiveData.postValue(new ArrayList<>());
     }
 
-    public void exportProcessFlow() {
-        xmlExporter.exportProcessFlow(getProcessFlow());
-    }
-
     public void importProcessFlow(String fileContent) throws Exception {
         setProcessFlow(xmlParser.parseProcessFlow(fileContent));
     }
@@ -52,6 +48,14 @@ public class ProcessFlowViewModel extends ViewModel {
     public void importDefinition(String content) {
         Definition definition = xmlParser.parseDefinition(content);
         addDefinition(definition);
+    }
+
+    public void exportProcessFlow() {
+        xmlExporter.exportProcessFlow(getProcessFlow());
+    }
+
+    public String getProcessFlowContent() {
+        return xmlExporter.getProcessFlowContent(getProcessFlow());
     }
 
     public ProcessFlow getProcessFlow() {
@@ -151,4 +155,5 @@ public class ProcessFlowViewModel extends ViewModel {
     public void setIsGeneral(boolean isGeneral) {
         isGeneralLiveData.postValue(isGeneral);
     }
+
 }

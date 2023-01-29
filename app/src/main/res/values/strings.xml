@@ -58,4 +58,5 @@
     <string name="action_edit">Edit Process Flow</string>
     <string name="new_process_flow">New</string>
     <string name="title_edit_process_flow">Edit Process Flow</string>
+    <string name="action_share">Share</string>
 </resources>

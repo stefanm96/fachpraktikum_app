@@ -27,6 +27,20 @@ public class XmlExporter {
     public void exportProcessFlow(ProcessFlow processFlow) {
         try {
             Log.i(TAG, "Start exporting...");
+
+            String processFlowContent = getProcessFlowContent(processFlow);
+            fileWriter.writeToFile(processFlow.getName() + EXTENSION, processFlowContent);
+
+            Log.i(TAG, "Exporting finished successfully!");
+        } catch (IOException e) {
+            Log.e(TAG, "Exporting failed!");
+            e.printStackTrace();
+            throw new ExportFailedException();
+        }
+    }
+
+    public String getProcessFlowContent(ProcessFlow processFlow) {
+        try {
             StringWriter writer = new StringWriter();
             xmlSerializer.setOutput(writer);
 
@@ -37,12 +51,10 @@ public class XmlExporter {
             xmlSerializer.setOutput(null);
 
             Log.i(TAG, writer.toString());
-            fileWriter.writeToFile(processFlow.getName() + EXTENSION, writer.toString());
-            Log.i(TAG, "Exporting finished successfully!");
+            return writer.toString();
         } catch (IOException e) {
-            Log.e(TAG, "Exporting failed!");
             e.printStackTrace();
-            throw new ExportFailedException();
+            throw new RuntimeException();
         }
     }
 }

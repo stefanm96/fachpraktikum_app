@@ -29,7 +29,11 @@ public class GmafApplication extends Application {
         XmlExporter xmlExporter = new XmlExporter(Xml.newSerializer(), fileWriter);
         fileProvider = new FileProvider(getFilesDir());
         processFlowViewModel = new ProcessFlowViewModel(xmlParser, xmlExporter);
-
+//        try {
+//            processFlowViewModel.importProcessFlow(fileProvider.getFileContent("SampleConfig.xml"));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     public ProcessFlowViewModel getProcessFlowViewModel() {
