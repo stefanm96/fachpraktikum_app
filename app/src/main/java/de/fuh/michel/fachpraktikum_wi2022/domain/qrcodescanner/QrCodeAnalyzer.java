@@ -18,14 +18,14 @@ import com.google.mlkit.vision.common.InputImage;
 import java.util.List;
 import java.util.function.Consumer;
 
-import de.fuh.michel.fachpraktikum_wi2022.BarcodeScannerActivity;
+import de.fuh.michel.fachpraktikum_wi2022.QrCodeScannerActivity;
 
 public class QrCodeAnalyzer implements ImageAnalysis.Analyzer {
 
     private final AppCompatActivity context;
     private final Consumer<String> qrCodeListener;
 
-    public QrCodeAnalyzer(BarcodeScannerActivity context, Consumer<String> qrCodeListener) {
+    public QrCodeAnalyzer(QrCodeScannerActivity context, Consumer<String> qrCodeListener) {
         this.context = context;
         this.qrCodeListener = qrCodeListener;
     }

@@ -52,7 +52,7 @@ public class MainActivityTest {
             assertTrue(activity.onOptionsItemSelected(addDefinitionItem));
 
             // Test that the correct activity is started when the "Add Definition" menu item is selected
-            Intent expectedIntent = new Intent(activity, BarcodeScannerActivity.class);
+            Intent expectedIntent = new Intent(activity, QrCodeScannerActivity.class);
             ShadowActivity shadowActivity = Shadows.shadowOf(activity);
             Intent actualIntent = shadowActivity.getNextStartedActivity();
             assertEquals(expectedIntent.getComponent(), actualIntent.getComponent());

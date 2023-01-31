@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add_definition) {
-            Intent intent = new Intent(this, BarcodeScannerActivity.class);
+            Intent intent = new Intent(this, QrCodeScannerActivity.class);
             startActivity(intent);
             return true;
         }

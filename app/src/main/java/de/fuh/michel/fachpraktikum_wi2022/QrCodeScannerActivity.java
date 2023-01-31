@@ -21,20 +21,20 @@ import com.google.common.util.concurrent.ListenableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityBarcodeScannerBinding;
+import de.fuh.michel.fachpraktikum_wi2022.databinding.ActivityQrCodeScannerBinding;
 import de.fuh.michel.fachpraktikum_wi2022.domain.qrcodescanner.QrCodeAnalyzer;
 import de.fuh.michel.fachpraktikum_wi2022.view.ProcessFlowViewModel;
 
-public class BarcodeScannerActivity extends AppCompatActivity {
+public class QrCodeScannerActivity extends AppCompatActivity {
 
     private ExecutorService cameraExecutor;
-    private ActivityBarcodeScannerBinding binding;
+    private ActivityQrCodeScannerBinding binding;
     private ProcessFlowViewModel processFlowViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityBarcodeScannerBinding.inflate(getLayoutInflater());
+        binding = ActivityQrCodeScannerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         processFlowViewModel = ((GmafApplication) getApplication()).getProcessFlowViewModel();

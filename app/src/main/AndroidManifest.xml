@@ -39,7 +39,7 @@
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".BarcodeScannerActivity"
+            android:name=".QrCodeScannerActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
